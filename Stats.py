@@ -30,7 +30,7 @@ def pie(values, labels, title=""):
     plt.title(title)
     return
 
-file=Electricity("C:/Users/Huawei/Desktop/ADSAssign2/electricityconsumption.csv")
+a,b =Electricity("C:/Users/Huawei/Desktop/ADSAssign2/electricityconsumption.csv")
 
 #print(df1)
 # df1=file
