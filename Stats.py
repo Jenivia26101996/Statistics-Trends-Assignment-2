@@ -10,27 +10,43 @@ import matplotlib.pyplot as plt
 # import seaborn as sns
 # import numpy as np
 
-def Electricity(file):
-    df1=pd.read_csv(file,skiprows=(4),index_col=False)
-    df1.reset_index(drop=True, inplace=True)
-    df1=df1.iloc[5:10,50:55]
-    print(df1)
-    #df1=df1.drop(['Country Code','Indicator Name','Indicator Code'],axis=1)
-    df2=pd.DataFrame.transpose(df1)
-    df2=df2.rename(columns=df2.iloc[0])
-    print(df2)
-    df2=df2.drop(index=df2.index[0],axis=1) 
-    df2=df2.reset_index()
-    df2=df2.rename(columns={'index':"Year"})
-    print(df2)
-    return df1,df2 
+def electric(filename):
+    df=pd.read_csv(filename,skiprows=(4))
+    a=df['Country Name']
+    df=df.iloc[15:20,50:55]
+    #print(df['Country Name']=="Belgium")
+    print(df)
+    df = df.fillna(0)
+    print(df)
+    df.insert(loc=0,column='Country Name',value=a)
+    #df.apply(lambda col: pd.Series(col.unique()))
+    #df.insert(loc=0,column='Year',value=b)
+    df=df.dropna(axis=1)
+    df1=df.set_index('Country Name').T
+    print(df)
+    a1=df['Country Name']
+    b1=df[['2006','2007','2008','2009','2010']]
+    print(a1)
+    plt.figure(figsize=(20,10),dpi=144)                   #resolution and clarity purpose of graph
+    plt.plot(a1,b1["2006"],label="2006")    #calling function to plot line
+    plt.plot(a1,b1["2007"],label="2007")  
+    plt.plot(a1,b1["2008"],label="2008")  
+    plt.plot(a1,b1["2009"],label="2009")  
+    plt.plot(a1,b1["2010"],label="2010")  
+    #plt.plot(df, df["Female"],"Female","blue")
+    plt.xlabel("Countries")
+    plt.ylabel("Energy per Capita")
+    plt.title("Electric Consumption per Capita")
+    plt.legend(loc="best")   
+    return df,df1 
 
-def pie(values, labels, title=""):
-    plt.pie(values,labels=labels)
-    plt.title(title)
-    return
 
-a,b =Electricity("C:/Users/Huawei/Desktop/ADSAssign2/electricityconsumption.csv")
+# def pie(values, labels, title=""):
+#     plt.pie(values,labels=labels)
+#     plt.title(title)
+#     return
+
+a,b=electric("electricityconsumption.csv")
 
 #print(df1)
 # df1=file
