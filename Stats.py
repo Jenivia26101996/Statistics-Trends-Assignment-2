@@ -157,10 +157,11 @@ plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 plt.savefig("forest.png",bbox_inches="tight")
 plt.show()
 
+"""correlation plot for heatmap"""
 def corr_plot(file):
     df_stats = pd.read_csv(file,skiprows=(4))
     a=df_stats['Indicator Name']
-    df_stats=df_stats.iloc[[8288,8289,8290,8291,8292],[55,56,58,59,60]]
+    df_stats=df_stats.iloc[[4181,4182,4183,4184,4214],[55,56,58,59,60]]
     df_stats = df_stats.fillna(0)
     df_stats.insert(loc=0,column='Indicator Name',value=a)
     df_stats=df_stats.dropna(axis=1)
@@ -182,7 +183,7 @@ def corr_plot(file):
          rotation = 45,
          ha = "right",
          rotation_mode = "anchor")
-    ax.set_title("India", 
+    ax.set_title("Germany", 
              size=20)
     valfmt="{x:.2f}"
     textcolors=("black", "black")
@@ -213,6 +214,6 @@ def corr_plot(file):
             text = im.axes.text(j, i, valfmt(b[i, j], None), **kw)
             texts.append(text)
     fig.tight_layout()
-    plt.savefig("axis_labels_in_heatmap_in_matplotlib.png",format='png',dpi=150)
+    plt.savefig("Heatmap_in_matplotlib.png",format='png',dpi=150)
     return
-corr_plot("C:/Users/Huawei/Desktop/ADSAssign2/API_19_DS2_en_csv_v2_4700503.csv")
+corr_plot("API_19_DS2_en_csv_v2_4700503.csv")
